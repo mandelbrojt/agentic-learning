@@ -1,0 +1,24 @@
+// A three-pane workspace for solving challenges.
+// Start it from the repository root:
+//   zellij --session coding-practice --new-session-with-layout extras/zellij/coding-practice.kdl
+layout {
+    cwd "challenges"
+
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    tab name="practice" split_direction="vertical" {
+        pane name="notebook" size="50%" focus=true
+        pane split_direction="horizontal" size="50%" {
+            pane name="editor" size="60%"
+            pane name="console" size="40%"
+        }
+    }
+}

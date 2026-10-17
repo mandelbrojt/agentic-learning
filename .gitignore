@@ -1,0 +1,11 @@
+# Learner challenges stay local, so `git pull` never conflicts with your work
+challenges/*
+!challenges/.gitkeep
+
+# Dependencies and caches
+node_modules/
+.venv/
+__pycache__/
+
+# OS files
+.DS_Store
