@@ -21,7 +21,7 @@ Paths below are relative to this skill's directory (`<skill-dir>`).
 3. **Always clear**: the goal and acceptance criteria are objective at every
    difficulty. Harder means **less guidance**, never less clarity. See `references/difficulty-levels.md`.
 4. **The learner writes the code**: starter code has structure only (types,
-   signatures, placeholders). Never ship a solution.
+   signatures, a `Write your solution here` comment). Never ship a solution.
 5. **Runs on this machine**: never generate a challenge whose toolchain is
    missing. Check first, then guide the installation.
 6. **The original example is a guide, not a template**: `references/example/NOTES.md`
@@ -107,11 +107,22 @@ Follow `references/challenge-format.md` exactly:
 
 - `assignment.md`: sections and guidance per level.
 - Starter code in the standard layout of the language and framework (`references/test-runners.md`):
-  - Beginner: all files, types and signatures; TODO comments that mirror the
-    "Step by step" list; placeholder body.
-  - Intermediate: types and public signatures; placeholder body.
+  - Beginner: all files, types and signatures.
+  - Intermediate: types and public signatures.
   - Advanced: only the public entry point/interface the tests use.
-  - The placeholder must **compile** and fail at runtime (`throw new Error("Not implemented")`, `raise NotImplementedError`, `todo!()`...).
+  - Mark where the learner writes code with a single `Write your solution here`
+    comment in the challenge language's comment syntax (`// Write your solution here`,
+    `# Write your solution here`...). Put it where the solution belongs, as the
+    exercise and tests require: a function or method body, a class, a component,
+    a route handler, or the end of a module.
+  - Add this comment **only** in the files the learner edits (`entryPoints`).
+    Nowhere else: no comment in tests, config, type-only files or `assignment.md`.
+  - No other TODO or step comments in the starter. The step-by-step guidance
+    lives only in `assignment.md`.
+  - Don't throw "not implemented" errors. If the code would not compile without
+    a body, add only the smallest default value the language needs after the
+    comment (`return 0;`, `return nil`, `return ""`, `Default::default()`...).
+    See `references/test-runners.md`.
 - Visible tests using the ecosystem's standard runner. Prefix each test name
   with its AC ID. Check each output field or behavior separately so a failure
   points at one thing. Beginner: one behavior per test, and every test is visible.
@@ -134,8 +145,8 @@ packages globally.
 The challenge folder must never contain solution code. Follow "Running extra tests in a temporary copy" in `references/test-runners.md`:
 
 1. **The starter fails as expected**: run `testCommand` in the challenge folder.
-   The tests must run (no compile, import or syntax errors) and fail because of
-   the placeholder. For typed languages, also type-check the starter (for example
+   The tests must run (no compile, import or syntax errors) and fail because the
+   solution is missing. For typed languages, also type-check the starter (for example
    `npx tsc --noEmit`, `go vet ./...`, `cargo check`).
 2. **The tests can pass**: in a temp copy, write a correct reference solution
    in the entry-point files and run `testCommand`. Every visible test must pass.
@@ -156,7 +167,8 @@ Confirm every item before reporting:
 - [ ] `assignment.md` has every required section; guidance matches the level; the goal is one clear sentence.
 - [ ] Every AC is objective, has at least one test, and every test maps to an AC.
 - [ ] Names match exactly across `assignment.md`, starter code, tests and rubric.
-- [ ] Starter code compiles and fails only because of placeholders. No solution logic anywhere.
+- [ ] Starter code compiles and fails only because the solution is missing. No solution logic anywhere.
+- [ ] Each entry-point file has exactly one `Write your solution here` comment in the language's syntax; no other file has it; no TODO or step comments; any default return is only what the compiler needs.
 - [ ] No hidden tests and no solution files in the challenge folder.
 - [ ] `meta.json` is valid JSON; `hiddenTests.enabled` is `false` for beginner and `true` otherwise, and lists the right ACs.
 - [ ] `rubric.md` has no solution code and no concrete hidden inputs.
@@ -180,6 +192,6 @@ Don't reveal the solution or describe how to solve it.
 - `references/toolchains.md`: version managers, install steps per OS, [agent]/[user] tags
 - `references/difficulty-levels.md`: level matrix, clarity rules, the same task at 3 levels
 - `references/real-world-domains.md`: realism checklist and scenario bank
-- `references/test-runners.md`: runners, layouts, placeholders, temp-copy procedure
+- `references/test-runners.md`: runners, layouts, solution comment and default returns, temp-copy procedure
 - `references/challenge-format.md`: `assignment.md`, `meta.json`, `rubric.md` formats
 - `references/example/`: the original example and `NOTES.md`

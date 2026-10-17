@@ -15,19 +15,36 @@ Every challenge must:
 - Pin the toolchain version (`.nvmrc`, `.python-version`, `go.mod`,
   `.sdkmanrc`, `rust-toolchain.toml`, `.ruby-version`, `global.json`).
 - Ship a `.gitignore` for dependency and build folders.
-- Use a starter placeholder that **compiles/imports** but fails at runtime, so
-  tests run and fail with a clear message instead of a build error:
+- Mark where the learner writes code with a single `Write your solution here`
+  comment, **only** in the entry-point files the learner edits. Place it where
+  the solution belongs (function or method body, class, component, route
+  handler, end of a module...). No other TODO or step comments, and no thrown
+  "not implemented" errors.
+- The starter must still **compile/import** so tests run and fail on their
+  assertions instead of a build error. When a body can't be empty (a declared
+  return type, a required return value), add only the smallest default value
+  after the comment. Otherwise the comment stands alone.
 
-| Language | Placeholder |
-|---|---|
-| TypeScript / JavaScript | `throw new Error("Not implemented");` |
-| Python | `raise NotImplementedError` |
-| Java / Kotlin | `throw new UnsupportedOperationException("Not implemented");` / `TODO("Not implemented")` |
-| Go | `panic("not implemented")` |
-| Rust | `todo!()` |
-| Ruby | `raise NotImplementedError` |
-| C# | `throw new NotImplementedException();` |
-| PHP | `throw new \LogicException('Not implemented');` |
+| Language | Comment | Minimal default return (only if needed to compile) |
+|---|---|---|
+| TypeScript / JavaScript | `// Write your solution here` (in JSX: `{/* Write your solution here */}`) | JS: none. TS: `return 0;`, `return "";`, `return [];`, `return null;`, or `return {} as T;` to match the type |
+| Python | `# Write your solution here` | `pass` (empty bodies are a syntax error) |
+| Java | `// Write your solution here` | `return 0;`, `return null;`, `return false;`... |
+| Kotlin | `// Write your solution here` | `return 0`, `return ""`, `return emptyList()`... |
+| Go | `// Write your solution here` | `return 0`, `return ""`, `return nil`, `return T{}`... |
+| Rust | `// Write your solution here` | `Default::default()` or a literal (`0`, `String::new()`, `Vec::new()`) |
+| Ruby | `# Write your solution here` | none |
+| C# | `// Write your solution here` | `return default;` |
+| PHP | `// Write your solution here` | `return 0;`, `return '';`, `return [];`... (only with a declared return type) |
+
+Example (TypeScript):
+
+```ts
+export function calculateTotal(items: CartItem[]): number {
+  // Write your solution here
+  return 0;
+}
+```
 
 Test naming: prefix every test name with the criterion ID, for example
 `"AC2: joins chat messages with a newline"`. Group tests per function or
@@ -70,7 +87,7 @@ tests/<module>.test.ts
   ```
   With `NodeNext`, relative imports in tests use the `.js` extension:
   `import { calculateTotal } from "../src/cart.js";`
-- Don't enable `noUnusedParameters`/`noUnusedLocals`: starter placeholders have unused parameters.
+- Don't enable `noUnusedParameters`/`noUnusedLocals`: starter functions have unused parameters.
 - `setupCommand`: `npm install` · `testCommand`: `npm test`
 - Type-check in verification with `npx tsc --noEmit` so the starter compiles.
 
@@ -153,7 +170,7 @@ Default runner: **`cargo test`**.
 Layout: library crate (`src/lib.rs`), integration tests in `tests/<feature>.rs`, `rust-toolchain.toml`.
 - `testCommand`: `cargo test`
 - Axum: build the `Router` in a function; test with `tower::ServiceExt::oneshot`.
-- Use `todo!()` in starters; mark unused params with `_` prefix to avoid warnings.
+- Starters use `// Write your solution here` plus `Default::default()` (or a literal) when a return value is needed; mark unused params with `_` prefix to avoid warnings.
 
 ## Ruby
 

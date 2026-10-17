@@ -28,7 +28,7 @@ concurrency, and failure handling.
 | Acceptance criteria | 2–5, each very concrete | 4–8, including error/edge behavior | 5–12, including constraints (performance, errors, concurrency, API contracts) |
 | Guidance section | **Step-by-step** numbered instructions mapped to criteria, plus 1–3 hints and links to relevant language docs | **Tips**: at most 2 short hints, no step list | **None.** Only a "Constraints" list; the learner chooses the approach |
 | Examples in assignment | Input → output example for each criterion | 1–2 representative examples | Examples only where needed to remove ambiguity (formats, contracts) |
-| Starter code | All files, types and signatures; function bodies contain TODO comments that mirror the steps, then the "not implemented" placeholder | Types and public signatures; bodies only have the placeholder | Only the public entry point / interface the tests use; the learner creates internal helpers, files and types |
+| Starter code | All files, types and signatures; a single `Write your solution here` comment where the learner writes code | Types and public signatures; a single `Write your solution here` comment where the learner writes code | Only the public entry point / interface the tests use, with a single `Write your solution here` comment; the learner creates internal helpers, files and types |
 | Visible tests | **All** tests visible; one behavior per test; descriptive names | Main behavior of every criterion visible | Smoke tests for each criterion (happy paths) |
 | Hidden tests (generated at review time) | **None** | A few edge cases (3–6) for the criteria marked hidden | More edge cases, error paths and limits (6–12) |
 | Feedback tone at review | Detailed, explains why, small illustrative snippets | Points to the issue and explains the reason | Short, peer-review style, discusses trade-offs |
@@ -81,7 +81,8 @@ compute order totals at checkout. The samples below show only the parts of
 > - An empty array never enters the loop, so `total` stays `0` (AC2 comes for free).
 > - Docs: [for...of](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...of)
 
-Starter body contains TODO comments matching steps 2–4, then the placeholder.
+Starter: `CartItem` type and `calculateTotal` signature; the body has only
+`// Write your solution here` and `return 0;` (needed to type-check).
 
 ### Intermediate (difficulty 6)
 
@@ -102,7 +103,8 @@ Starter body contains TODO comments matching steps 2–4, then the placeholder.
 >
 > Some extra tests for these criteria run when you ask for a review.
 
-Starter: types and `calculateTotal` signature, error classes declared, empty bodies.
+Starter: types and `calculateTotal` signature, error classes declared; the body
+has only `// Write your solution here` and the minimal default return.
 
 ### Advanced (difficulty 9)
 
@@ -123,4 +125,5 @@ Starter: types and `calculateTotal` signature, error classes declared, empty bod
 >
 > Additional tests for these criteria run when you ask for a review.
 
-Starter: `src/index.ts` exporting the types and a `createPricingEngine` that throws "not implemented".
+Starter: `src/index.ts` exporting the types and a `createPricingEngine` whose
+body has only `// Write your solution here` and the minimal default return.
