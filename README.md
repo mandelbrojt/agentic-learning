@@ -99,7 +99,7 @@ Harder means less guidance, never less clarity: the acceptance criteria always s
 
 Any editor works for these challenges, including VS Code or another IDE. If you prefer to work entirely in the terminal, here is one setup that works well. It's only a suggestion: install the tools however you like and make the configuration your own.
 
-![A Zellij session with three panes: the assignment on the left, the code editor top right, and the test output bottom right](docs/images/console-ide-example.png)
+![A Zellij session with three panes: the assignment on the left, the code editor top right, and the test output bottom right](console-ide-example.png)
 
 - **notebook** (left): `assignment.md` open in Neovim, to keep the acceptance criteria in view
 - **editor** (top right): the code you're writing
