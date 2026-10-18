@@ -109,7 +109,18 @@ Rules:
     "criteria": [],
     "location": "tests/hidden.test.ts"
   },
-  "createdAt": "2026-10-17"
+  "createdAt": "2026-10-17",
+  "generation": {
+    "skill": "create-coding-challenge",
+    "sessionID": "ses_…",
+    "generatedAt": "2026-10-17T14:03:00Z",
+    "model": { "id": "claude-opus-5-5", "providerID": "opencode", "variant": "default" },
+    "costUSD": 0.5337,
+    "tokens": { "input": 556, "output": 9062, "reasoning": 2612, "cacheRead": 362493, "cacheWrite": 45564, "total": 420287 },
+    "context": { "peak": 152000, "limit": 1000000, "percent": 15.2 },
+    "subagentSessions": 0,
+    "partial": true
+  }
 }
 ```
 
@@ -123,6 +134,11 @@ Field notes:
 - `hiddenTests.enabled`: `false` for beginner, `true` for intermediate/advanced.
 - `hiddenTests.criteria`: AC IDs that get extra edge-case tests at review time.
 - `hiddenTests.location`: where, inside the temporary copy, the reviewer puts the generated hidden test file (see `test-runners.md`).
+- `generation`: what generating the challenge cost. It is the output of
+  `learning-stats/scripts/usage.sh report create-coding-challenge` without the
+  `available` field, added last (SKILL.md Step 8). Leave it out when usage was
+  unavailable. Field meanings are in `../../learning-stats/references/events.md`.
+  It's for statistics only: never show it in `assignment.md`.
 
 ---
 

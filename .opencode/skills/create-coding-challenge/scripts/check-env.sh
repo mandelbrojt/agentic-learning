@@ -54,6 +54,7 @@ detect_os() {
   echo "  System pkg mgr:   $pm"
   have curl && ok "curl available (needed by most installers)" || warn "curl not found (needed by most installers)"
   have git && ok "git available" || warn "git not found (some installers need it)"
+  have jq && ok "jq available (needed for usage statistics)" || warn "jq not found (usage statistics will be skipped)"
 }
 
 check_node() {

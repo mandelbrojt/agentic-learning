@@ -10,7 +10,9 @@ Generate a coding challenge the learner solves by **writing code** to fix a
 `review-coding-challenge`, later reviews the learner's solution, so every
 challenge also includes review metadata.
 
-Paths below are relative to this skill's directory (`<skill-dir>`).
+Paths below are relative to this skill's directory (`<skill-dir>`). Usage
+tracking lives in the shared `learning-stats` folder:
+`<stats-dir>` = `<skill-dir>/../learning-stats`.
 
 ## Principles (always apply)
 
@@ -31,7 +33,15 @@ Paths below are relative to this skill's directory (`<skill-dir>`).
 
 ### Step 1: Collect the inputs
 
-Required. **Always ask** for any that are missing (use the question tool, in
+First, start measuring the generation cost (see `<stats-dir>/references/events.md`):
+
+```sh
+bash "<stats-dir>/scripts/usage.sh" start
+```
+
+Never stop if it reports `"available": false`; just remember the reason for Steps 8 and 9.
+
+Inputs are required. **Always ask** for any that are missing (use the question tool, in
 one round when possible). Never assume defaults.
 
 | Input | Rules |
@@ -174,7 +184,23 @@ Confirm every item before reporting:
 - [ ] `rubric.md` has no solution code and no concrete hidden inputs.
 - [ ] The challenge runs offline with one setup command and one test command.
 
-### Step 8: Report to the user
+### Step 8: Record the generation usage
+
+Do this last, right before reporting, so the numbers cover as much of the work
+as possible. Follow `<stats-dir>/references/events.md`:
+
+1. Run `bash "<stats-dir>/scripts/usage.sh" report create-coding-challenge`.
+2. If `available` is `true`: add the output, without the `available` field, to
+   `.challenge/meta.json` as `generation` (see `references/challenge-format.md`).
+   Keep `meta.json` valid JSON.
+3. Append a `challenge.generated` event to the central log with
+   `bash "<stats-dir>/scripts/usage.sh" log '<event-json>'`: `skill`, the
+   `subject` built from `meta.json` (with the absolute challenge path), and
+   `usage` (the usage block without `available`, `skill` and `sessionID`).
+   If usage was unavailable, log the event without `usage`.
+4. Never put usage in `assignment.md` or anywhere else the learner reads.
+
+### Step 9: Report to the user
 
 Keep it short:
 
@@ -182,6 +208,9 @@ Keep it short:
 - One-line scenario and learning goals.
 - How to start: `cd <folder>`, open `assignment.md`, run `<testCommand>`.
 - Remind them to ask for a review (the `review-coding-challenge` skill) when they're done.
+- One line with the generation usage: model, estimated cost in USD, total
+  tokens and peak context (tokens and %), plus the central log path. If usage
+  was unavailable, say why in one line.
 
 Don't reveal the solution or describe how to solve it.
 
@@ -195,3 +224,5 @@ Don't reveal the solution or describe how to solve it.
 - `references/test-runners.md`: runners, layouts, solution comment and default returns, temp-copy procedure
 - `references/challenge-format.md`: `assignment.md`, `meta.json`, `rubric.md` formats
 - `references/example/`: the original example and `NOTES.md`
+- `<stats-dir>/scripts/usage.sh`: usage baseline, usage report and central log (`start`, `report`, `log`, `path`)
+- `<stats-dir>/references/events.md`: usage block, central log location and event formats
