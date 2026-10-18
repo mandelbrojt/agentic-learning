@@ -29,6 +29,9 @@ opencode
 
 That's it. OpenCode finds the skills in `.opencode/skills/` automatically whenever you start it anywhere inside this repository.
 
+This is how it looks when using Visual Studio Code as the IDE:
+![A Visual Studio Code session showing with four panes: the explorer on the left, the assignmentd preview in the middle, the code editor at the right, and the console on the bottom](vscode-ide-example.png)
+
 ## Create your first challenge
 
 In OpenCode, describe what you want to practice. For example:
