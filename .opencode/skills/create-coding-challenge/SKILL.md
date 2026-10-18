@@ -80,7 +80,7 @@ bash "<skill-dir>/scripts/check-env.sh" <language>
   section of `references/toolchains.md`, and apply the same stop-and-guide rules.
 
 Framework packages are not system requirements: they are installed per project
-in Step 6. If a framework needs extra **system** tools (for example a browser or
+in Step 5. If a framework needs extra **system** tools (for example a browser or
 a database server), redesign the challenge to avoid them (jsdom, SQLite in
 memory, fakes) rather than requiring installs.
 
